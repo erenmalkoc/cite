@@ -4,17 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
+
+    val viewModel: CiteViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-
+        handleIntent(intent)
 
 
     }
@@ -27,16 +31,18 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-   private fun handleIntent (intent : Intent?){
+    private fun handleIntent(intent: Intent?) {
 
         if (intent?.action == Intent.ACTION_SEND && intent.type == "text/plain") {
             intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
-
-                findViewById<TextView>(R.id.textView).text = it.split("\\n[\\r]?".toRegex())[0]
+                viewModel.onIntentWithTextExtra(it)
             }
 
         }
 
+    }
+
+    private fun inflateNavGraphWithArgs(cite: String) {
+        findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph)
     }
 }
