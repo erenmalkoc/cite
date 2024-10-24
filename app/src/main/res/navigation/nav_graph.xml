@@ -6,11 +6,21 @@
     app:startDestination="@id/infoFragment">
     <fragment
         android:id="@+id/infoFragment"
-        android:name="dev.erenmalkoc.cite.InfoFragment"
+        android:name="dev.erenmalkoc.cite.info.InfoFragment"
         android:label="InfoFragment"
         tools:layout="@layout/fragment_info"
 
 
+        >
+        <action
+            android:id="@+id/action_infoFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="dev.erenmalkoc.cite.preview.PreviewFragment"
+        android:label="PreviewFragment"
+        tools:layout="@layout/fragment_preview"
         />
 
 

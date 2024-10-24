@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_stroke_width">2dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="preview_item_spacing">16dp</dimen>
+</resources>

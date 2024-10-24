@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="dev.erenmalkoc.cite.CiteViewModel" />
+
+        <variable
+            name="viewBinding"
+            type="dev.erenmalkoc.cite.preview.PreviewViewBinding" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      >
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            itemDecoration="@{viewBinding.itemDecoration}"
+            items="@{viewModel.previews}"
+            adapter="@{viewBinding.adapter}"
+            tools:listitem="@layout/item_preview"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/nextButton"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_margin="16dp"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
+
+
+
