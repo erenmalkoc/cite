@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs")
+
 }
 
 android {
@@ -28,15 +30,18 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding = true
-    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -45,13 +50,12 @@ kapt {
 }
 
 dependencies {
+    val nav_version = "2.8.3"
 
-
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.navigation.ui)
-
-
-
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
