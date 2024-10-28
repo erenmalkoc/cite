@@ -2,33 +2,33 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name = "item"
-            type = "dev.erenmalkoc.cite.preview.Preview"
-            />
+            name="item"
+            type="dev.erenmalkoc.cite.preview.Preview" />
+
+        <variable
+            name="listener"
+            type="dev.erenmalkoc.cite.preview.PreviewAdapter.PreviewItemClickListener" />
 
 
         <variable
-            name = "viewModel"
-            type = "dev.erenmalkoc.cite.CiteViewModel"
-            />
+            name="citeInfo"
+            type="dev.erenmalkoc.cite.preview.CiteInfo" />
     </data>
 
 
-   <com.google.android.material.card.MaterialCardView
-       android:layout_width="match_parent"
-       app:strokeColor="@color/charcoal"
-       android:layout_height="wrap_content"
-       layoutId="@{item.layoutId}"
-       viewModel="@{viewModel}"
-       >
-
-
-   </com.google.android.material.card.MaterialCardView>
-
-
-
+    <com.google.android.material.card.MaterialCardView
+        layoutId="@{item.layoutId}"
+        viewModel="@{citeInfo}"
+        strokeWidthRes="@{item.strokeWidth}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onItemClick(item)}"
+        app:strokeColor="@color/charcoal"
+       />
 
 
 </layout>
