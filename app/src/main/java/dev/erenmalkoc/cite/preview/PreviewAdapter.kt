@@ -6,11 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.erenmalkoc.cite.CiteViewModel
 import dev.erenmalkoc.cite.R
 import dev.erenmalkoc.cite.databinding.ItemPreviewBinding
 
-class PreviewAdapter(private val viewModel: CiteViewModel) :
+class PreviewAdapter(private val citeInfo: CiteInfo,
+    private val listener : PreviewItemClickListener
+    ) :
     ListAdapter<Preview, PreviewAdapter.PreviewHolder>(DIFF_CALLBACK) {
 
 
@@ -23,7 +24,7 @@ class PreviewAdapter(private val viewModel: CiteViewModel) :
             false
         )
 
-        return PreviewHolder(binding,viewModel)
+        return PreviewHolder(binding,citeInfo,listener)
     }
 
     override fun onBindViewHolder(holder: PreviewHolder, position: Int) {
@@ -33,15 +34,22 @@ class PreviewAdapter(private val viewModel: CiteViewModel) :
 
     class PreviewHolder(
         private val binding: ItemPreviewBinding,
-        private val viewModel: CiteViewModel
+        private val citeInfo: CiteInfo,
+        private val listener: PreviewItemClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(preview: Preview) {
             binding.item = preview
-            binding.viewModel = viewModel
+            binding.citeInfo=citeInfo
+            binding.listener = listener
             binding.executePendingBindings()
         }
     }
+
+    interface PreviewItemClickListener {
+fun onItemClick(preview : Preview)
+    }
+
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Preview>() {

@@ -3,14 +3,15 @@ package dev.erenmalkoc.cite
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.DimenRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import com.google.android.material.card.MaterialCardView
+import dev.erenmalkoc.cite.preview.CiteInfo
 
 
 @Suppress("UNCHECKED_CAST")
@@ -31,16 +32,35 @@ fun RecyclerView.itemDecoration(itemDecoration: ItemDecoration?) {
 }
 
 
-//TODO: THIS INFLATES AND FINDS VIEWS WITH EVERY BIND OPERATION. THIS IS NOT GOOD PRACTİSE. FIX LATER!
+//TODO: THIS INFLATES AND FINDS VIEWS WITH EVERY BIND OPERATION. THIS IS NOT GOOD PRACTISE. FIX LATER!
 @BindingAdapter("layoutId", "viewModel")
-fun ViewGroup.childView(@LayoutRes layoutId: Int, viewModel: CiteViewModel) {
-    if (childCount == 0) {
+fun ViewGroup.childView(@LayoutRes layoutId: Int, citeInfo: CiteInfo) {
+    /*    if (childCount == 0) {
 
-        LayoutInflater.from(context).inflate(layoutId, this, true)
-        findViewById<TextView>(R.id.citeText).text = viewModel.cite.value!!
-        findViewById<TextView>(R.id.authorCommaBookText).text =
-            viewModel.author.value!! + " , " + viewModel.book.value!!
+            val view = LayoutInflater.from(context).inflate(layoutId, this, true)
+            findViewById<TextView>(R.id.citeText).text = citeInfo.cite
+            findViewById<TextView>(R.id.bookText).text = citeInfo.book
+            findViewById<TextView>(R.id.authorText).text = citeInfo.author
+            //TODO: THIS CODE IS BROKEN
+
+            //TODO: CHECK INFLATE USAGE AGAIN AND ATTACH TO ROOT PARAMETER!!!
 
 
-    }
+        }*/
+
+    if (childCount != 0) removeAllViews()
+    val view = LayoutInflater.from(context).inflate(layoutId, this, true)
+    findViewById<TextView>(R.id.citeText).text = citeInfo.cite
+    findViewById<TextView>(R.id.bookText).text = citeInfo.book
+    findViewById<TextView>(R.id.authorText).text = citeInfo.author
+
+}
+
+
+@BindingAdapter("strokeWidthRes")
+fun MaterialCardView.strokeWidthRes(@DimenRes widthRes: Int) {
+
+    strokeWidth = resources.getDimensionPixelSize(widthRes)
+
+
 }
