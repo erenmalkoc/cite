@@ -1,6 +1,8 @@
 package dev.erenmalkoc.cite
 
+import android.content.ClipboardManager
 import android.content.Intent
+import android.content.Intent.ACTION_SEND
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -14,6 +16,11 @@ class MainActivity : AppCompatActivity() {
 
     val viewModel: CiteViewModel by viewModels()
 
+
+    private val clipboardManager by lazy {
+        getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,6 +29,15 @@ class MainActivity : AppCompatActivity() {
         handleIntent(intent)
 
 
+
+    }
+
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if(hasFocus && intent?.action != ACTION_SEND){
+            informViewModelOfCopiedTextIfNotNull()
+        }
 
     }
 
@@ -44,7 +60,34 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    private fun informViewModelOfCopiedTextIfNotNull() {
+        clipboardManager.copiedString()?.let{
+            viewModel.onClipboardText(it)
+        }
+
+    }
+    private fun addClipboardListener() {
+
+        val clipBoardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        clipBoardManager.addPrimaryClipChangedListener {
+          clipBoardManager.primaryClip?.getItemAt(0)?.text?.toString()?.let{
+              viewModel.onClipboardText(it)
+          }
+
+        }
+    }
+
+
+
+
     private fun inflateNavGraphWithArgs(cite: String) {
         findNavController(R.id.nav_host_fragment).setGraph(R.navigation.nav_graph)
     }
+
+
+    companion object {
+        private  fun ClipboardManager.copiedString() = primaryClip?.getItemAt(0)?.text?.toString()
+    }
+
 }
