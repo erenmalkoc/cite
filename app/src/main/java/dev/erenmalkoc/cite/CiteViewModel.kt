@@ -42,6 +42,10 @@ class CiteViewModel : ViewModel(), PreviewAdapter.PreviewItemClickListener {
 
     }
 
+    fun onClipboardText(copiedText : String) {
+cite.value = copiedText
+    }
+
     override fun onItemClick(preview: Preview) {
         previews.value = previews.value!!.map {
             if (it.layoutId == preview.layoutId) {
