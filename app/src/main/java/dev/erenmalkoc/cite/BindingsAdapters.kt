@@ -33,7 +33,7 @@ fun RecyclerView.itemDecoration(itemDecoration: ItemDecoration?) {
 
 
 //TODO: THIS INFLATES AND FINDS VIEWS WITH EVERY BIND OPERATION. THIS IS NOT GOOD PRACTISE. FIX LATER!
-@BindingAdapter("layoutId", "viewModel")
+@BindingAdapter("layoutId", "citeInfo")
 fun ViewGroup.childView(@LayoutRes layoutId: Int, citeInfo: CiteInfo) {
     /*    if (childCount == 0) {
 

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CiteApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.CiteApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/charcoal</item>
         <item name="colorPrimaryVariant">@color/black</item>
