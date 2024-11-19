@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="dev.erenmalkoc.cite.preview.Preview" />
@@ -13,16 +12,16 @@
             name="listener"
             type="dev.erenmalkoc.cite.preview.PreviewAdapter.PreviewItemClickListener" />
 
-
         <variable
             name="citeInfo"
             type="dev.erenmalkoc.cite.preview.CiteInfo" />
     </data>
 
 
+
     <com.google.android.material.card.MaterialCardView
         layoutId="@{item.layoutId}"
-        viewModel="@{citeInfo}"
+        citeInfo="@{citeInfo}"
         strokeWidthRes="@{item.strokeWidth}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

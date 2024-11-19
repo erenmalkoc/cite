@@ -21,6 +21,16 @@
         android:name="dev.erenmalkoc.cite.preview.PreviewFragment"
         android:label="PreviewFragment"
         tools:layout="@layout/fragment_preview"
+        >
+        <action
+            android:id="@+id/actionShare"
+            app:destination="@id/shareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="dev.erenmalkoc.cite.share.ShareFragment"
+        android:label="ShareFragment"
+        tools:layout="@layout/fragment_share"
         />
 
 
